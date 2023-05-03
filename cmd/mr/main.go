@@ -10,13 +10,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 2 {
+	if len(os.Args) < 3 {
 		fmt.Fprintf(os.Stderr, "Invalid arguments\n")
 		os.Exit(1)
 	}
 
-	iscoord := os.Args[0] == "mrcoordinator"
-	isworker := os.Args[0] == "mrworker"
+	iscoord := os.Args[1] == "mrcoordinator"
+	isworker := os.Args[1] == "mrworker"
 
 	if iscoord {
 		runCoordinator()
@@ -30,12 +30,12 @@ func main() {
 }
 
 func runWorker() {
-	mapf, reducef := loadPlugin(os.Args[1])
+	mapf, reducef := loadPlugin(os.Args[2])
 	mr.Worker(mapf, reducef)
 }
 
 func runCoordinator() {
-	m := mr.MakeCoordinator(os.Args[1:], 10)
+	m := mr.MakeCoordinator(os.Args[2:], 10)
 	for m.Done() == false {
 		time.Sleep(time.Second)
 	}
