@@ -15,7 +15,16 @@ Step 2: Run coordinator
 ./main mrcoordinator cmd/mr/files/pg-*
 ```
 
-Step 3: Run worker
+Step 3: Run a single worker
+
+```zsh
+./main mrworker apps/wordcount.so
+```
+
+OR
+
+Run multiple workers
+
 
 ```zsh
 ./main mrworker apps/wordcount.so & ./main mrworker apps/wordcount.so
